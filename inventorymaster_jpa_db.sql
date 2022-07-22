@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Tem 2022, 15:11:14
+-- Üretim Zamanı: 22 Tem 2022, 23:11:57
 -- Sunucu sürümü: 10.4.24-MariaDB
 -- PHP Sürümü: 7.4.28
 
@@ -18,22 +18,43 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Veritabanı: `inventorymaster_db`
+-- Veritabanı: `inventorymaster_jpa_db`
 --
 
 DELIMITER $$
 --
 -- Yordamlar
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_delpeted_products` ()   BEGIN  
-    SELECT * FROM products WHERE quantity = 0;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_depleted_products` ()   BEGIN  
+
+    SELECT * FROM product WHERE quantity = 0;
+
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_paroducts_byquantity` (IN `quantity` DOUBLE)   BEGIN
-    SELECT * FROM products WHERE products.quantity = quantity;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_products_byquantity` (IN `quantity` DOUBLE)   BEGIN
+
+    SELECT * FROM product WHERE product.quantity = quantity;
+
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `hibernate_sequence`
+--
+
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `hibernate_sequence`
+--
+
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -43,9 +64,9 @@ DELIMITER ;
 
 CREATE TABLE `product` (
   `ID` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `quantity` float NOT NULL,
-  `SupplierID` int(11) NOT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `quantity` double DEFAULT NULL,
+  `SupplierID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -53,10 +74,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`ID`, `name`, `quantity`, `SupplierID`) VALUES
-(15, 'Beko T145', 56, 1),
-(16, 'Arçelik AK567 A+', 77, 1),
-(20, 'Yellow 56 T 32', 4, 1),
-(22, 'Karma Z45', 0, 3);
+(3, 'Kamao K78', 5, 3),
+(4, 'Sony W785', 2, 3),
+(5, 'Apple S785', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -66,17 +86,17 @@ INSERT INTO `product` (`ID`, `name`, `quantity`, `SupplierID`) VALUES
 
 CREATE TABLE `supplier` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(200) NOT NULL
+  `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `supplier`
 --
 
-INSERT INTO `supplier` (`ID`, `Name`) VALUES
-(1, 'Farma'),
-(2, 'Gama'),
-(3, 'Zama Co.');
+INSERT INTO `supplier` (`ID`, `name`) VALUES
+(2, 'Farma'),
+(3, 'Zanio Warehouse'),
+(4, 'Zamaron Co.');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -87,7 +107,7 @@ INSERT INTO `supplier` (`ID`, `Name`) VALUES
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_Supplier` (`SupplierID`);
+  ADD KEY `FK40s7h57wg41n8h6375fkfwut5` (`SupplierID`);
 
 --
 -- Tablo için indeksler `supplier`
@@ -103,7 +123,7 @@ ALTER TABLE `supplier`
 -- Tablo için AUTO_INCREMENT değeri `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `supplier`
@@ -119,7 +139,7 @@ ALTER TABLE `supplier`
 -- Tablo kısıtlamaları `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `FK_Supplier` FOREIGN KEY (`SupplierID`) REFERENCES `supplier` (`ID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK40s7h57wg41n8h6375fkfwut5` FOREIGN KEY (`SupplierID`) REFERENCES `supplier` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

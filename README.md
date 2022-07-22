@@ -1,10 +1,10 @@
-# Inventory Master using JDBC
+# Inventory Master using JPA and Hibernate
 
-This is a simple inventory managment software based on JDBC (DriverManager), papared by Maven. Its uses MySQL. 
+This is a simple inventory managment software based on Hibernate (JPA), papared by Maven. Its uses MySQL. 
 
 The project allows you to keep track of a product inventory with supplier information. Therefore, it includes two entities: Product and Supplier. There is an one-to-many relationship between them.  
 
-In terms JDBC features, the project runs queries using Statement, PreparedStatement and CallableStatement (for stored prosedures).
+In terms JPA features, the project runs queries using SQL, JPQL, NamedQueries, stored procedure, NamedStoredProcedure.
 
 The project has an MVC like architecture in which CLI, Repository and Model are seperated. It also applies repository pattern.
 

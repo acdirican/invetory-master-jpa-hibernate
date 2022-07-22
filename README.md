@@ -8,7 +8,7 @@ In terms JPA features, the project runs queries using SQL, JPQL, NamedQueries, s
 
 The project has an MVC like architecture in which CLI, Repository and Model are seperated. It also applies repository pattern.
 
-Before running the project, you first need to install MySQL (port: 3306) and then create the inventorymaster_db using the SQL import file given in the project folder.
+Before running the project, you first need to install MySQL (port: 3306) and then create the inventorymaster_jpa_db using the SQL import file given in the project folder.
 
 For now, the project only includes  command line interface.
 

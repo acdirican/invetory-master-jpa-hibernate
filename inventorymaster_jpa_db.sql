@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Tem 2022, 23:11:57
+-- Üretim Zamanı: 23 Tem 2022, 00:49:08
 -- Sunucu sürümü: 10.4.24-MariaDB
 -- PHP Sürümü: 7.4.28
 
@@ -75,8 +75,9 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`ID`, `name`, `quantity`, `SupplierID`) VALUES
 (3, 'Kamao K78', 5, 3),
-(4, 'Sony W785', 2, 3),
-(5, 'Apple S785', 0, 4);
+(4, 'Sony X A++', 67, 3),
+(5, 'Apple S785', 0, 4),
+(8, 'Aiwa TY45', 12, 2);
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,8 @@ CREATE TABLE `supplier` (
 INSERT INTO `supplier` (`ID`, `name`) VALUES
 (2, 'Farma'),
 (3, 'Zanio Warehouse'),
-(4, 'Zamaron Co.');
+(4, 'Zamaron Co.'),
+(7, 'Ekol Lojistik');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -123,13 +125,13 @@ ALTER TABLE `supplier`
 -- Tablo için AUTO_INCREMENT değeri `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar

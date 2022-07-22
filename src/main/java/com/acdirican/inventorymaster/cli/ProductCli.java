@@ -45,7 +45,7 @@ public class ProductCli extends AbstractCLi {
 			return "No product deleted.";
 		}
 
-		return Cli.DBERROR;
+		return Command.DBERROR;
 
 	}
 
@@ -54,7 +54,7 @@ public class ProductCli extends AbstractCLi {
 		List<Product> products = productRepository.listDepleteds();
 
 		if (products == null) {
-			return Cli.DBERROR;
+			return Command.DBERROR;
 		}
 		printProductList(products);
 		return products.size() + " products have been successfull listed.";
@@ -65,7 +65,7 @@ public class ProductCli extends AbstractCLi {
 
 		List<Product> products = productRepository.listEquals(quantity);
 		if (products == null) {
-			return Cli.DBERROR;
+			return Command.DBERROR;
 		}
 		printProductList(products);
 		return products.size() + " products have been successfull listed.";
@@ -76,7 +76,7 @@ public class ProductCli extends AbstractCLi {
 
 		List<Product> products = productRepository.find(name);
 		if (products == null) {
-			return Cli.DBERROR;
+			return Command.DBERROR;
 		}
 		printProductList(products);
 		return products.size() + " products have been successfull listed.";
@@ -87,7 +87,7 @@ public class ProductCli extends AbstractCLi {
 
 		List<Product> products = productRepository.listMoreThan(quantity);
 		if (products == null) {
-			return Cli.DBERROR;
+			return Command.DBERROR;
 		}
 		printProductList(products);
 		return products.size() + " products have been successfull listed.";
@@ -98,7 +98,7 @@ public class ProductCli extends AbstractCLi {
 
 		List<Product> products = productRepository.listLessThan(quantity);
 		if (products == null) {
-			return Cli.DBERROR;
+			return Command.DBERROR;
 		}
 		printProductList(products);
 		return products.size() + " products have been successfull listed.";
@@ -108,7 +108,7 @@ public class ProductCli extends AbstractCLi {
 	String update(int ID) {
 		Optional<Product> productOp = productRepository.getWidthID(ID);
 		if (productOp.isEmpty()) {
-			return Cli.ERROR + "Product with the ID " + ID + " could not be found!";
+			return Command.ERROR + "Product with the ID " + ID + " could not be found!";
 		}
 		Product product = productOp.get();
 
@@ -140,7 +140,7 @@ public class ProductCli extends AbstractCLi {
 		if (productRepository.update(product)) {
 			return "Product succesfully updated!";
 		}
-		return Cli.ERROR + "Product could not be updated!";
+		return Command.ERROR + "Product could not be updated!";
 	
 	}
 
@@ -154,14 +154,14 @@ public class ProductCli extends AbstractCLi {
 			return "Product delete is succesfull.";
 		}
 
-		return Cli.ERROR + "Product with the ID " + ID + " could not be found!";
+		return Command.ERROR + "Product with the ID " + ID + " could not be found!";
 	}
 
 	String getWidthIndex(int index) {
 		
 		Optional<Product> productOp = productRepository.getWithIndex(index);
 		if (productOp.isEmpty()) {
-			return Cli.ERROR + "Product with the index " + index + " could not be found!";
+			return Command.ERROR + "Product with the index " + index + " could not be found!";
 		}
 		Product product = productOp.get();
 		
@@ -172,7 +172,7 @@ public class ProductCli extends AbstractCLi {
 	public String getWidthID(int ID) {
 		Optional<Product> productOp = productRepository.getWidthID(ID);
 		if (productOp.isEmpty()) {
-			return Cli.ERROR + "Product with the ID " + ID + " could not be found!";
+			return Command.ERROR + "Product with the ID " + ID + " could not be found!";
 		}
 		System.out.println(productOp.get());
 		return "Product get is successfull.";
@@ -212,7 +212,7 @@ public class ProductCli extends AbstractCLi {
 	String list() {
 		List<Product> products = productRepository.list();
 		if (products == null) {
-			return Cli.DBERROR;
+			return Command.DBERROR;
 		}
 		printProductList(products);
 		return products.size() + " products have been successfull listed.";

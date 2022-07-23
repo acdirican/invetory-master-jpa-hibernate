@@ -1,6 +1,6 @@
 # Inventory Master using JPA and Hibernate
 
-This is a simple inventory managment software based on Hibernate (JPA), papared by Maven. Its uses MySQL. Please look at my invetory-master-JDBC repository for its JDBC version.
+This is a simple inventory managment software based on Hibernate (JPA), papared by Maven. Its uses MySQL. You look at my invetory-master-JDBC repository for its JDBC version.
 
 The project allows you to keep track of a product inventory with supplier information. Therefore, it includes two entities: Product and Supplier. There is an one-to-many relationship between them.  
 

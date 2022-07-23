@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.acdirican.inventorymaster.repository.Repository;
+import com.acdirican.inventorymaster.repository.RepositoryJPA;
 
 @Entity
 @Table(name ="supplier")

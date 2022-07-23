@@ -14,9 +14,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
@@ -24,28 +27,22 @@ import com.acdirican.inventorymaster.model.Supplier;
 /**
  * Fundamental repository class responsible for DB connection and entity repository initialization
  * 
- * JPA: -> EntityManagerFacotry -> EntityManager -> createQuery, createNamed, find, persist, merge, remove
+ * JPA: -> EntityManagerFacotry -> Session -> createQuery, createNamed, find, persist, merge, remove
  * 
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class Repository {
+public class RepositoryHibernate extends BaseRepository{
 
-	static final String ERROR = "Database error!";
+	private static Session session;
+	private static SessionFactory sessionFactory;
 	
-	private static EntityManager entitiyManager;
-	private static EntityManagerFactory entityManagerFactory;
 	
-	private static ProductRepository productRepository;
-	private static SupplierRepository supplierRepository;
-	
-	public boolean connect() throws SQLException {
+	public boolean connect() {
 		
-		String myPersistenceUnit = "InventoryMasterJPAHibernate";
-
-	      
-		entityManagerFactory = Persistence.createEntityManagerFactory(myPersistenceUnit); 
-		entitiyManager = entityManagerFactory.createEntityManager();
+	    Configuration cfg =  new Configuration().configure();
+		sessionFactory = cfg.buildSessionFactory();
+		session = sessionFactory.openSession();
 		
 		productRepository = new ProductRepository(this);
 		supplierRepository =  new SupplierRepository(this);
@@ -54,9 +51,9 @@ public class Repository {
 	}
 
 	public void close() {
-		if (entitiyManager != null) {
-			entitiyManager.close();
-			entityManagerFactory.close();
+		if (session != null) {
+			session.close();
+			sessionFactory.close();
 		}
 	}
 	
@@ -86,8 +83,8 @@ public class Repository {
 		return supplierRepository.getWidthID(ID);
 	}
 	
-	public EntityManager getConnection() {
-		return entitiyManager;
+	public Session getConnection() {
+		return session;
 	}
 	
 	

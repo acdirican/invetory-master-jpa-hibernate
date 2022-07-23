@@ -26,9 +26,9 @@ import com.mysql.cj.QueryReturnType;
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class ProductRepository extends AbstracyRepository {
+public class ProductRepository extends BaseEntityRepository {
 
-	public ProductRepository(Repository repository) {
+	public ProductRepository(BaseRepository repository) {
 		super(repository);
 	}
 

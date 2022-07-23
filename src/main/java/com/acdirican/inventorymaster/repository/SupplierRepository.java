@@ -27,9 +27,9 @@ import com.acdirican.inventorymaster.model.Supplier;
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class SupplierRepository extends AbstracyRepository {
+public class SupplierRepository extends BaseEntityRepository {
 
-	public SupplierRepository(Repository repository) {
+	public SupplierRepository(BaseRepository repository) {
 		super(repository);
 	}
 

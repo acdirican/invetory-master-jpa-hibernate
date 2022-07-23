@@ -8,7 +8,7 @@ import java.util.Scanner;
 import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
 import com.acdirican.inventorymaster.repository.ProductRepository;
-import com.acdirican.inventorymaster.repository.Repository;
+import com.acdirican.inventorymaster.repository.BaseRepository;
 import com.acdirican.inventorymaster.repository.SupplierRepository;
 
 /**
@@ -21,21 +21,22 @@ public class Cli {
 
 	
 	private Scanner scanner = null;
-	private Repository repository;
+	private BaseRepository repository;
 	private ProductRepository productRepository;
 	private SupplierRepository supplierRepository;
 
 	private ProductCli productCli;
 	private SupplierCli supplierCli;
 
-	public Cli(Repository repository) {
-		try {
-			repository.connect();
-			System.out.println("DB conneciton is successfull!");
-		} catch (SQLException e) {
+	public Cli(BaseRepository repository) {
+		
+		if (!repository.connect()) {
 			System.err.println("Could not be connected to the mysql database!");
-			e.printStackTrace();
+			return;
 		}
+		
+		System.out.println("DB conneciton is successfull!");			
+
 		this.repository = repository;
 		this.productRepository = repository.getProductRepository();
 		this.supplierRepository = repository.getSupplierRepository();
@@ -258,7 +259,7 @@ public class Cli {
 		return supplierCli;
 	}
 
-	public Repository getRepository() {
+	public BaseRepository getRepository() {
 		return repository;
 	}
 

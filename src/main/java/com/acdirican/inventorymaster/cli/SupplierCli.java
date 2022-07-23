@@ -71,13 +71,39 @@ public class SupplierCli extends AbstractCLi {
 		System.out.println("Live empty if you don't want to update the field!");
 		System.out.println("Enter supplier name:");
 		String name = scanner.nextLine().trim();
+		Utils.shortLine();
+		System.out.println("Enter phone:");
+		String phone = scanner.nextLine();
+		System.out.println("Enter address:");
+		String address = scanner.nextLine();
+		Utils.shortLine();
+		System.out.println("Enter contact person firstname:");
+		String contactFirstName = scanner.nextLine();
+		System.out.println("Enter contact person last:");
+		String contactPersonLastName = scanner.nextLine();
 		
 		Utils.line();
 
 		if (!name.equals("")) {
 			supplier.setName(name);
 		}
+		
+		if (!phone.equals("")) {
+			supplier.getContact().setPhone(phone);
+		}
+		
+		if (!address.equals("")) {
+			supplier.getContact().setAddress(address);
+		}
 
+		if (!contactFirstName.equals("")) {
+			supplier.getContactPerson().setFirstName(contactFirstName);
+		}
+		
+		if (!contactPersonLastName.equals("")) {
+			supplier.getContactPerson().setLastName(contactPersonLastName);;
+		}
+		
 		if (supplierRepository.update(supplier)) {
 			return "Supplier succesfully updated!";
 		} else {
@@ -126,11 +152,23 @@ public class SupplierCli extends AbstractCLi {
 	}
 
 	String add() {
+		System.out.println("Add New Supplier");
 		Utils.line();
-		System.out.println("Enter supplier name:");
+		
+		System.out.println("Enter name:");
 		String name = scanner.nextLine();
+		System.out.println("Enter phone:");
+		Utils.shortLine();;
+		String phone = scanner.nextLine();
+		System.out.println("Enter address:");
+		String address = scanner.nextLine();
+		Utils.shortLine();
+		System.out.println("Enter contact person firstname:");
+		String contactFirstName = scanner.nextLine();
+		System.out.println("Enter contact person last:");
+		String contactPersonLastName = scanner.nextLine();
 		Utils.line();
-		Supplier supplier = new Supplier(name);
+		Supplier supplier = new Supplier(name, phone, address, contactFirstName, contactPersonLastName);
 
 		if (supplierRepository.add(supplier).isPresent())
 			return "A new supplier added.";

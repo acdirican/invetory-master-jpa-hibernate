@@ -27,4 +27,9 @@ public final class Utils {
 		System.out.println("------------------------------------------------------------------------");	
 	}
 
+	static void shortLine() {
+		System.out.println("-------------------------------");	
+		
+	}
+
 }

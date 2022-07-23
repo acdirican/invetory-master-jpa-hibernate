@@ -2,6 +2,7 @@ package com.acdirican.inventorymaster.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -56,9 +57,13 @@ public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
-
+	
+	@Column(nullable = false)
 	private String name;
+	
+	@Column(columnDefinition = "double default 0" )
 	private Double quantity;
+	
 	@ManyToOne
 	@JoinColumn(name = "SupplierID")
 	private Supplier supplier;

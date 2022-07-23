@@ -4,7 +4,7 @@ This is a simple inventory managment software based on Hibernate (JPA), papared 
 
 The project allows you to keep track of a product inventory with supplier information. Therefore, it includes two entities: Product and Supplier. There is an one-to-many relationship between them.  
 
-In terms JPA features, the project runs queries using SQL, JPQL, NamedQueries, stored procedure, NamedStoredProcedure.
+In terms JPA features, the project runs queries using SQL, JPQL, NamedQueries, stored procedure, NamedStoredProcedure, as well ass Entity, Embeddable and SecondaryTable.
 
 You can run the project using JPA (EntityManager, persistance.xml) or native Hibernate (Session, hibernate.cfg.xml) using the factory BaseRepository
 

@@ -27,7 +27,8 @@ import com.acdirican.inventorymaster.model.Supplier;
  * JPA: -> EntityManagerFacotry -> EntityManager -> createQuery, createNamed, find, persist, merge, remove
  * 
  * @author Ahmet Cengizhan Dirican
- *
+ * 
+ *https://stackoverflow.com/questions/10607196/how-to-get-database-metadata-from-entity-manager
  */
 public class RepositoryJPA extends BaseRepository {
 

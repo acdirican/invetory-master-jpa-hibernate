@@ -72,6 +72,10 @@ public class Cli {
 		case Command.FIND: {
 			return find(parameters);
 		}
+		
+		case Command.INCREASE: {
+			return increase(parameters);
+		}
 
 		case Command.ADD: {
 			return add(parameters);
@@ -111,6 +115,22 @@ public class Cli {
 		default:
 			return Command.ERROR + "Unknown command!";
 		}
+	}
+
+	private String increase(String[] parameters) {
+		if (parameters.length < 3) {
+			return Command.ERROR + "Missign argument!";
+		}
+		try {
+			
+			int ID = Integer.parseInt(parameters[1]);
+			double quantity =  Double.parseDouble(parameters[2]);
+			return productCli.increaseInvetory(ID, quantity);
+			
+		} catch (NumberFormatException e) {
+			return Command.ERROR + "ID and quantity must be umeric!";
+		}
+		
 	}
 
 	private String update(String[] parameters) {

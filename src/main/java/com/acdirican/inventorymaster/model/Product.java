@@ -32,7 +32,9 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Product.findMoreThan"
 	, query ="SELECT p FROM Product p WHERE p.quantity >= : quantity"),
 	@NamedQuery(name = "Product.findLessThan"
-	, query ="SELECT p FROM Product p WHERE p.quantity <= : quantity")
+	, query ="SELECT p FROM Product p WHERE p.quantity <= : quantity"),
+	@NamedQuery(name = "Product.increaseInvetory"
+	, query ="UPDATE Product p SET p.quantity = p.quantity + :quantity Where p.ID = :id")
 })
 
 //https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/named-stored-procedure.html

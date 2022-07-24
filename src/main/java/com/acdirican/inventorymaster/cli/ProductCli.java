@@ -219,6 +219,23 @@ public class ProductCli extends AbstractCLi {
 
 	}
 
+	public String increaseInvetory(int ID, double quantity) {
+		Optional<Product> productOp = productRepository.getWidthID(ID);
+		if (productOp.isEmpty()) {
+			return Command.ERROR + "Product with the ID " + ID + " could not be found!";
+		}
+		System.out.println(productOp.get());
+		if (Utils.confirm("Are you sure to increase the product's inventory?")) {
+			return productRepository.increaseInvetory(productOp.get(), quantity) >0 
+					? "Inventory increased succesfully"
+					: "Inventory could no be increased! Check Product ID or quantity!";
+		}
+		else {
+			return "Cancelled!";
+		}
+		
+	}
+
 
 
 }

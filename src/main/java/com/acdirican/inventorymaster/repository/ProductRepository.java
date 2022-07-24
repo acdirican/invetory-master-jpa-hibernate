@@ -145,4 +145,25 @@ public class ProductRepository extends BaseEntityRepository {
 		return result;
 	}
 
+	/*Using named query*/
+	public int increaseInvetory(int ID, double quantity) {
+		entityManager.getTransaction().begin();;
+		int result = entityManager.createNamedQuery("Product.increaseInvetory").setParameter("id", ID)
+				.setParameter("quantity", quantity).executeUpdate();
+		entityManager.getTransaction().commit();
+		return result;
+	}
+
+	/*Using the entity*/
+	public double increaseInvetory(Product product, double quantity) {
+		if (product== null && quantity>0) {
+			return -1;
+		}
+		entityManager.getTransaction().begin();
+		product.setQuantity(product.getQuantity() + quantity);
+		entityManager.merge(product);
+		entityManager.getTransaction().commit();
+		return quantity;
+	}
+
 }

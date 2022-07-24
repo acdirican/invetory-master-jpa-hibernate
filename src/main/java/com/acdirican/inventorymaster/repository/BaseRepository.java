@@ -52,5 +52,6 @@ public abstract  class BaseRepository {
 
 	protected abstract EntityManager getConnection();
 	
+	
 
 }

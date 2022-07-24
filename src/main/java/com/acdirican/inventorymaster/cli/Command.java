@@ -16,6 +16,10 @@ public class Command {
 		static final String PRODUCT = "product";
 		static final String SUPPLIER = "supplier";
 	
+	static final String INCREASE = "incr";
+	static final String DECREASE = "decr";
+	static final String LOG = "log";
+	
 	static final String FIND = "find";
 	static final String UPDATE = "update";
 	static final String GETWITHID = "getid";

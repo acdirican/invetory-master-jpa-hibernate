@@ -1,6 +1,6 @@
 package com.acdirican.inventorymaster.model;
 
-import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -59,7 +59,7 @@ import javax.persistence.Table;
 })
 
 
-public class Product implements Serializable{
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -172,7 +172,7 @@ public class Product implements Serializable{
 	}
 
 	public Object toShortString() {
-		return name.subSequence(0, Math.min(25, name.length())) + "(" + ID + ")";
+		return "(" + ID + ")" + name.subSequence(0, Math.min(25, name.length()));
 	}
 	
 	

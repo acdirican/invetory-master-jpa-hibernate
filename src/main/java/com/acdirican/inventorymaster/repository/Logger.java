@@ -1,23 +1,9 @@
 package com.acdirican.inventorymaster.repository;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.StringJoiner;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transaction;
-
-import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Log;
 
 /**

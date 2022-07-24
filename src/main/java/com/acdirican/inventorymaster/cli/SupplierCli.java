@@ -1,13 +1,10 @@
 package com.acdirican.inventorymaster.cli;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.ProductRepository;
 import com.acdirican.inventorymaster.repository.SupplierRepository;
 
 /**

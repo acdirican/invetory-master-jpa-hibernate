@@ -1,6 +1,5 @@
 package com.acdirican.inventorymaster.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -19,7 +18,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-import com.acdirican.inventorymaster.repository.RepositoryJPA;
 
 @Entity
 @Table(name ="supplier")
@@ -27,7 +25,7 @@ import com.acdirican.inventorymaster.repository.RepositoryJPA;
 		@NamedQuery(name = "Supplier.findByName", query = "SELECt s FROM Supplier s WHERE s.name LIKE :name"),
 		@NamedQuery(name = "Supplier.listProducts", query ="SELECT s FROM Supplier s WHERE s.ID = :id")} )
 @SecondaryTable(name = "contact_person", pkJoinColumns = @PrimaryKeyJoinColumn(name="SupplierID"))
-public class Supplier implements Serializable{
+public class Supplier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;

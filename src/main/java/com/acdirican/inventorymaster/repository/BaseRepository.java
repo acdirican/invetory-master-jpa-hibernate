@@ -1,12 +1,10 @@
 package com.acdirican.inventorymaster.repository;
 
-import java.sql.SQLException;
+
 import java.util.Optional;
-import java.util.StringJoiner;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 
 import com.acdirican.inventorymaster.model.Supplier;
 

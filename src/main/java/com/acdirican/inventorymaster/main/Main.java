@@ -1,12 +1,10 @@
 package com.acdirican.inventorymaster.main;
 
-import java.awt.Component.BaselineResizeBehavior;
-import java.sql.SQLException;
 
 import com.acdirican.inventorymaster.cli.Cli;
 import com.acdirican.inventorymaster.repository.BaseRepository;
 import com.acdirican.inventorymaster.repository.BaseRepository.RepositoryType;
-import com.acdirican.inventorymaster.repository.RepositoryJPA;
+
 
 /**
  * Starter class of the project.

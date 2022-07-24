@@ -1,7 +1,7 @@
 package com.acdirican.inventorymaster.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "log")
 @NamedQueries({
-	@NamedQuery(name="Log.filterByProductID",query= "SELECT l from Log l WHERE l.product.id = :id")	
+	@NamedQuery(name="Log.filterByProductID",query= "select l from Log l where l.product.id = :id")	
 })
 public class Log {
 	

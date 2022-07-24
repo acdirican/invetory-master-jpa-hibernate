@@ -76,6 +76,10 @@ public class Cli {
 		case Command.INCREASE: {
 			return increase(parameters);
 		}
+		
+		case Command.DECREASE: {
+			return increase(parameters);
+		}
 
 		case Command.ADD: {
 			return add(parameters);
@@ -113,13 +117,13 @@ public class Cli {
 			return "bye bye";
 
 		default:
-			return Command.ERROR + "Unknown command!";
+			return Error.ERROR + "Unknown command!";
 		}
 	}
 
 	private String increase(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		try {
 			
@@ -128,14 +132,30 @@ public class Cli {
 			return productCli.increaseInvetory(ID, quantity);
 			
 		} catch (NumberFormatException e) {
-			return Command.ERROR + "ID and quantity must be umeric!";
+			return Error.ERROR + "ID and quantity must be umeric!";
+		}
+		
+	}
+	
+	private String deacrease(String[] parameters) {
+		if (parameters.length < 3) {
+			return Error.ERROR + Error.MISSING_ARGUMENT;
+		}
+		try {
+			
+			int ID = Integer.parseInt(parameters[1]);
+			double quantity =  Double.parseDouble(parameters[2]);
+			return productCli.increaseInvetory(ID, quantity);
+			
+		} catch (NumberFormatException e) {
+			return Error.ERROR + "ID and quantity must be umeric!";
 		}
 		
 	}
 
 	private String update(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		int ID = Integer.parseInt(parameters[2]);
 		if (parameters[1].equalsIgnoreCase(Command.PRODUCT)) {
@@ -143,12 +163,12 @@ public class Cli {
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return supplierCli.update(ID);
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 	}
 
 	private String delete_all(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 
 		List<Integer> id_list = new ArrayList<>();
@@ -162,12 +182,12 @@ public class Cli {
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return supplierCli.delete_all(id_list);
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 	}
 
 	private String add(String[] parameters) {
 		if (parameters.length < 2) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 
 		if (parameters[1].equalsIgnoreCase(Command.PRODUCT)) {
@@ -175,25 +195,25 @@ public class Cli {
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return supplierCli.add();
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 
 	}
 	
 	private String find(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		if (parameters[1].equalsIgnoreCase(Command.PRODUCT)) {
 			return productCli.find(parameters[2]);
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return supplierCli.find(parameters[2]);
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 
 	}
 	private String getWidthIndex(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		int index = Integer.parseInt(parameters[2]);
 		if (parameters[1].equalsIgnoreCase(Command.PRODUCT)) {
@@ -201,13 +221,13 @@ public class Cli {
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return  supplierCli.getWithIndex(index);
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 
 	}
 	
 	private String getWidthID(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		int ID = Integer.parseInt(parameters[2]);
 		if (parameters[1].equalsIgnoreCase(Command.PRODUCT)) {
@@ -215,13 +235,13 @@ public class Cli {
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return  supplierCli.getWidthID(ID);
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 
 	}
 
 	private String delete(String[] parameters) {
 		if (parameters.length < 3) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		int ID = Integer.parseInt(parameters[2]);
 		if (parameters[1].equalsIgnoreCase(Command.PRODUCT)) {
@@ -229,13 +249,13 @@ public class Cli {
 		} else if (parameters[1].equalsIgnoreCase(Command.SUPPLIER)) {
 			return supplierCli.delete(ID);
 		}
-		return Command.ERROR_UNKNOWN_PARAMATER;
+		return Error.UNKNOWN_PARAMATER;
 
 	}
 
 	private String list(String[] parameters) {
 		if (parameters.length < 2) {
-			return Command.ERROR + "Missign argument!";
+			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		switch (parameters[1]) {
 		case Command.PRODUCT: {
@@ -263,7 +283,7 @@ public class Cli {
 			return productCli.list_depleteds();
 		}
 		default:
-			return Command.ERROR + " Invalid list parameter";
+			return Error.ERROR + " Invalid list parameter";
 		}
 	}
 

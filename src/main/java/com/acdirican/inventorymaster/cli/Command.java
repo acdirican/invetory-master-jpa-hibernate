@@ -5,9 +5,7 @@ public class Command {
 	static final String HELP = "help";
 	static final String EXIT = "exit";
 	
-	
 	static final String LIST = "list";
-	
 		static final String LISTMORETHEN = "morethan";
 		static final String LISTLESSTHEN = "lessthan";
 		static final String LISTEQUALS = "equals";
@@ -30,10 +28,6 @@ public class Command {
 	static final String DELETE_ALL = "delete_all";
 
 	static final String META = "meta";
-
-	static final String ERROR = "ERROR: ";
-	static final String DBERROR = ERROR + " DB connection or query error!";
-	static final String ERROR_UNKNOWN_PARAMATER = ERROR + " Unknown paramter!";
 	
 	static final String QUANTITY = "[QUANTITY]";
 	static final String ID = "ID";

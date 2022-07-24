@@ -43,7 +43,7 @@ public class SupplierCli extends AbstractCLi {
 			return "No supplier deleted.";
 		}
 
-		return Command.DBERROR;
+		return Error.DBERROR;
 
 	}
 
@@ -51,7 +51,7 @@ public class SupplierCli extends AbstractCLi {
 
 		List<Supplier> suppliers = supplierRepository.find(name);
 		if (suppliers == null) {
-			return Command.DBERROR;
+			return Error.DBERROR;
 		}
 		printSupplierList(suppliers);
 		return suppliers.size() + " suppliers have been successfull listed.";
@@ -61,7 +61,7 @@ public class SupplierCli extends AbstractCLi {
 	String update(int ID) {
 		Optional<Supplier> supplierOp = supplierRepository.getWidthID(ID);
 		if (supplierOp.isEmpty()) {
-			return Command.ERROR + "Supplier with the ID " + ID + " could not be found!";
+			return Error.ERROR + "Supplier with the ID " + ID + " could not be found!";
 		}
 		Supplier supplier = supplierOp.get();
 
@@ -122,7 +122,7 @@ public class SupplierCli extends AbstractCLi {
 			return "Supplier delete is succesfull.";
 		}
 
-		return Command.ERROR + "Supplier with the ID " + ID + " could not be found!";
+		return Error.ERROR + "Supplier with the ID " + ID + " could not be found!";
 	}
 
 	String getWithIndex(int index) {
@@ -135,7 +135,7 @@ public class SupplierCli extends AbstractCLi {
 			return "Supplier fetch is succesfull.";
 		}
 
-		return Command.ERROR + "Supplier with the index number " + index + " could not be found!";
+		return Error.ERROR + "Supplier with the index number " + index + " could not be found!";
 	}
 
 	String getWidthID(int ID) {
@@ -148,7 +148,7 @@ public class SupplierCli extends AbstractCLi {
 			return "Supplier fetch is succesfull.";
 		}
 
-		return Command.ERROR + "Supplier with the ID number " + ID + " could not be found!";
+		return Error.ERROR + "Supplier with the ID number " + ID + " could not be found!";
 	}
 
 	String add() {
@@ -189,7 +189,7 @@ public class SupplierCli extends AbstractCLi {
 	String list() {
 		List<Supplier> suppliers = supplierRepository.list();
 		if (suppliers == null) {
-			return Command.DBERROR;
+			return Error.DBERROR;
 		}
 		printSupplierList(suppliers);
 		return suppliers.size() + " suppliers have been successfull listed.";

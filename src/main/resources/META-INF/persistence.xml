@@ -13,6 +13,7 @@
 		 <!-- Entity classes -->
         <class>com.acdirican.inventorymaster.model.Product</class>
         <class>com.acdirican.inventorymaster.model.Supplier</class>
+        <class>com.acdirican.inventorymaster.model.Log</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/inventorymaster_jpa_db" />

@@ -1,7 +1,9 @@
 package com.acdirican.inventorymaster.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedStoredProcedureQueries;
 import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
@@ -69,6 +72,9 @@ public class Product implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "SupplierID")
 	private Supplier supplier;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<Log> logs;
 	
 	public Product() {}
 	

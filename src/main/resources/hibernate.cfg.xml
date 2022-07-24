@@ -22,5 +22,6 @@
       
       <mapping class="com.acdirican.inventorymaster.model.Product"/>
       <mapping class="com.acdirican.inventorymaster.model.Supplier"/>
+      <mapping class="com.acdirican.inventorymaster.model.Log"/>
   </session-factory>
 </hibernate-configuration>

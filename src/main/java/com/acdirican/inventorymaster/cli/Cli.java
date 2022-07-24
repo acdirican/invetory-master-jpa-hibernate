@@ -9,6 +9,7 @@ import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
 import com.acdirican.inventorymaster.repository.ProductRepository;
 import com.acdirican.inventorymaster.repository.BaseRepository;
+import com.acdirican.inventorymaster.repository.Logger;
 import com.acdirican.inventorymaster.repository.SupplierRepository;
 
 /**
@@ -24,9 +25,11 @@ public class Cli {
 	private BaseRepository repository;
 	private ProductRepository productRepository;
 	private SupplierRepository supplierRepository;
+	private Logger logger;
 
 	private ProductCli productCli;
 	private SupplierCli supplierCli;
+	private LogCli logCli;
 
 	public Cli(BaseRepository repository) {
 		
@@ -40,9 +43,11 @@ public class Cli {
 		this.repository = repository;
 		this.productRepository = repository.getProductRepository();
 		this.supplierRepository = repository.getSupplierRepository();
+		this.logger = repository.getLogger();
+		
 		this.productCli = new ProductCli(this, productRepository);
 		this.supplierCli = new SupplierCli(this, supplierRepository);
-
+		this.logCli = new LogCli(this, logger);
 		this.scanner = Utils.scanner;
 		init();
 	}
@@ -81,6 +86,10 @@ public class Cli {
 			return deacreaseInvetory(parameters);
 		}
 
+		case Command.LOG: {
+			return log(parameters);
+		}
+		
 		case Command.ADD: {
 			return add(parameters);
 		}
@@ -119,6 +128,25 @@ public class Cli {
 		default:
 			return Error.ERROR + "Unknown command!";
 		}
+	}
+
+	private String log(String[] parameters) {
+		if (parameters.length < 2) {
+			return Error.ERROR + Error.MISSING_ARGUMENT;
+		}
+		if (parameters[1].equals(Command.ALL)) {
+			return logCli.list();
+		}
+		else {
+			try {
+				int ID = Integer.parseInt(parameters[1]);
+				return logCli.list(ID);
+				
+			} catch (NumberFormatException e) {
+				return Error.ERROR + "ID and quantity must be umeric!";
+			}
+		}
+		
 	}
 
 	private String increaseInvetory(String[] parameters) {

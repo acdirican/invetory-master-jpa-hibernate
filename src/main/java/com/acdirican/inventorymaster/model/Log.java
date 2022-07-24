@@ -12,11 +12,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "log")
+@NamedQueries({
+	@NamedQuery(name="Log.filterByProductID",query= "SELECT l from Log l WHERE l.product.id = :id")	
+})
 public class Log {
 	
 	@Id
@@ -37,14 +42,29 @@ public class Log {
 	@Column(name="type", nullable = false)
 	private InventoryMovement type;
 	
-	public Log() {
-	}
+	public Log() {}
 	
-	public Log(Double quantity, Product product) {
-		super();
+	//New product
+	public Log( Product product) {
+		this.quantity = product.getQuantity();
+		this.time = LocalDateTime.now();
+		this.product = product;
+		this.type = InventoryMovement.FIRST;
+	}
+
+	//Increase of deacrese inventory
+	public Log(double quantity, Product product, InventoryMovement type) {
 		this.quantity = quantity;
 		this.time = LocalDateTime.now();
 		this.product = product;
+		this.type = type;
+	}
+
+
+	//Update product
+	public Log(Product product, InventoryMovement type) {
+		this(product);
+		this.type = InventoryMovement.UPDATE;
 	}
 
 	public Integer getID() {
@@ -82,6 +102,10 @@ public class Log {
 	@Override
 	public String toString() {
 		return "Log [ID=" + ID + ", quantity=" + quantity + ", time=" + time + ", product=" + product.getName() + "]";
+	}
+
+	public InventoryMovement getType() {
+		return type;
 	}
 	
 	

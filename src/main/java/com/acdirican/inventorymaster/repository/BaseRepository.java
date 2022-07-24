@@ -23,6 +23,7 @@ public abstract  class BaseRepository {
 	
 	protected static ProductRepository productRepository;
 	protected static SupplierRepository supplierRepository;
+	protected static Logger logger;
 	
 	public abstract boolean connect();
 	public abstract void close();
@@ -44,6 +45,10 @@ public abstract  class BaseRepository {
 	
 	public SupplierRepository getSupplierRepository() {
 		return supplierRepository;
+	}
+	
+	public Logger getLogger() {
+		return logger;
 	}
 
 	public Optional<Supplier> findSupplier(int ID) {

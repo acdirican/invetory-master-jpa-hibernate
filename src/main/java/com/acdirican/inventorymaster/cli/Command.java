@@ -17,6 +17,7 @@ public class Command {
 	static final String INCREASE_INV = "inc_inv";
 	static final String DECREASE_INV = "dec_inv";
 	static final String LOG = "log";
+	static final String ALL = "all";
 	
 	static final String FIND = "find";
 	static final String UPDATE = "update";
@@ -48,6 +49,10 @@ public class Command {
 				+ LIST + SPACE + LISTEQUALS + QUANTITY + NL
 				+ LIST + SPACE + LISTDEPLETEDS + NL
 				+ FIND + SPACE + PS + " [NAME]" + NL
+				
+				+ INCREASE_INV + SPACE + ID + SPACE + QUANTITY + NL
+				+ DECREASE_INV + SPACE + ID + SPACE + QUANTITY + NL
+				+ LOG + SPACE + ALL + "/" + ID + NL
 				
 				+ GETWITHINDEX + SPACE + PS + SPACE + "[INDEX]" + NL 
 				+ GETWITHID + SPACE + PS +  ID + NL 

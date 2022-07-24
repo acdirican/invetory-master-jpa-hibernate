@@ -37,7 +37,9 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Product.findLessThan"
 	, query ="SELECT p FROM Product p WHERE p.quantity <= : quantity"),
 	@NamedQuery(name = "Product.increaseInvetory"
-	, query ="UPDATE Product p SET p.quantity = p.quantity + :quantity Where p.ID = :id")
+	, query ="UPDATE Product p SET p.quantity = p.quantity + :quantity Where p.ID = :id"),
+	@NamedQuery(name = "Product.filterBySupplier"
+	, query = "SELECT p FROM Product p WHERE p.supplier.ID = :id" ),
 })
 
 //https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/named-stored-procedure.html
@@ -167,6 +169,10 @@ public class Product implements Serializable{
 
 	public Supplier getSupplier() {
 		return supplier;
+	}
+
+	public Object toShortString() {
+		return name.subSequence(0, Math.min(25, name.length())) + "(" + ID + ")";
 	}
 	
 	

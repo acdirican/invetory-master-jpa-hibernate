@@ -35,10 +35,10 @@ public class Logger extends BaseEntityRepository {
 	public List<Log> list() {
 		return entityManager.createQuery("from Log", Log.class).getResultList();
 	}
-
-	public List<Log> listByProduct(int ProductID) {
-		return entityManager.createQuery("from Log l where l.ProuctID = :id", Log.class)
-				.setParameter("id", ProductID)
+	
+	public List<Log> listByProduct(int productID) {
+		return entityManager.createNamedQuery("Log.filterByProductID", Log.class)
+				.setParameter("id", productID)
 				.getResultList();
 	}
 	
@@ -101,5 +101,7 @@ public class Logger extends BaseEntityRepository {
 		entityManager.getTransaction().commit();
 		return true;
 	}
+
+	
 
 }

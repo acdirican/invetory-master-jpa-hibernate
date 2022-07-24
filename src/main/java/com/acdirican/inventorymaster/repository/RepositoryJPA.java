@@ -46,7 +46,7 @@ public class RepositoryJPA extends BaseRepository {
 		
 		productRepository = new ProductRepository(this);
 		supplierRepository =  new SupplierRepository(this);
-		
+		logger =  new Logger(this);
 		return true;
 	}
 

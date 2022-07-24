@@ -16,6 +16,8 @@ import java.util.StringJoiner;
 
 import javax.persistence.ParameterMode;
 
+import com.acdirican.inventorymaster.model.InventoryMovement;
+import com.acdirican.inventorymaster.model.Log;
 import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
 import com.mysql.cj.QueryReturnType;
@@ -27,9 +29,10 @@ import com.mysql.cj.QueryReturnType;
  *
  */
 public class ProductRepository extends BaseEntityRepository {
-
+	private Logger logger;
 	public ProductRepository(BaseRepository repository) {
 		super(repository);
+		this.logger =  new Logger(repository);
 	}
 
 	public List<Product> list() {
@@ -80,6 +83,7 @@ public class ProductRepository extends BaseEntityRepository {
             entityManager.getTransaction().begin();
             entityManager.persist(product);
             entityManager.getTransaction().commit();
+            logger.add(new Log(product));
             return Optional.of(product);
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,6 +132,7 @@ public class ProductRepository extends BaseEntityRepository {
 		entityManager.getTransaction().begin();
 		entityManager.merge(product);
 		entityManager.getTransaction().commit();
+		logger.add(new Log(product, InventoryMovement.UPDATE));
 		return true;
 	}
 
@@ -151,30 +156,43 @@ public class ProductRepository extends BaseEntityRepository {
 		int result = entityManager.createNamedQuery("Product.increaseInvetory").setParameter("id", ID)
 				.setParameter("quantity", quantity).executeUpdate();
 		entityManager.getTransaction().commit();
+		if(result>0) {
+			logger.add(new Log(quantity, getWidthID(ID).get(), InventoryMovement.INCREASE));
+		}
 		return result;
 	}
 
 	/*Using the entity*/
-	public double increaseInvetory(Product product, double quantity) {
+	public boolean increaseInvetory(Product product, double quantity) {
 		if (product== null && quantity>0) {
-			return -1;
+			return false;
 		}
+		double previousValue = product.getQuantity();
 		entityManager.getTransaction().begin();
 		product.setQuantity(product.getQuantity() + quantity);
 		entityManager.merge(product);
 		entityManager.getTransaction().commit();
-		return quantity;
+		
+		
+		if(product.getQuantity() != previousValue) {
+			logger.add(new Log(quantity, product, InventoryMovement.INCREASE));
+		}
+		return true;
 	}
 
-	public double decreaseInvetory(Product product, double quantity) {
+	public boolean decreaseInvetory(Product product, double quantity) {
 		if (product== null && quantity>0) {
-			return -1;
+			return false;
 		}
+		double previousValue = product.getQuantity();
 		entityManager.getTransaction().begin();
 		product.setQuantity(product.getQuantity() - quantity);
 		entityManager.merge(product);
 		entityManager.getTransaction().commit();
-		return quantity;
+		if(product.getQuantity() != previousValue) {
+			logger.add(new Log(quantity, product, InventoryMovement.DECREASE));
+		}
+		return true;
 	}
 
 }

@@ -226,7 +226,7 @@ public class ProductCli extends AbstractCLi {
 		}
 		System.out.println(productOp.get());
 		if (Utils.confirm("Are you sure to increase the product's inventory?")) {
-			return productRepository.increaseInvetory(productOp.get(), quantity) >0 
+			return productRepository.increaseInvetory(productOp.get(), quantity)  
 					? "Inventory increased succesfully"
 					: "Inventory could no be increased! Check Product ID or quantity!";
 		}
@@ -243,7 +243,7 @@ public class ProductCli extends AbstractCLi {
 		}
 		System.out.println(productOp.get());
 		if (Utils.confirm("Are you sure to decrease the product's inventory?")) {
-			return productRepository.decreaseInvetory(productOp.get(), quantity) >0 
+			return productRepository.decreaseInvetory(productOp.get(), quantity)  
 					? "Inventory decreased succesfully"
 					: "Inventory could no be decreased! Check Product ID or quantity!";
 		}
@@ -251,6 +251,8 @@ public class ProductCli extends AbstractCLi {
 			return "Cancelled!";
 		}
 	}
+
+	
 
 
 

@@ -236,6 +236,22 @@ public class ProductCli extends AbstractCLi {
 		
 	}
 
+	public String decreaseInvetory(int ID, double quantity) {
+		Optional<Product> productOp = productRepository.getWidthID(ID);
+		if (productOp.isEmpty()) {
+			return Error.ERROR + "Product with the ID " + ID + " could not be found!";
+		}
+		System.out.println(productOp.get());
+		if (Utils.confirm("Are you sure to decrease the product's inventory?")) {
+			return productRepository.decreaseInvetory(productOp.get(), quantity) >0 
+					? "Inventory decreased succesfully"
+					: "Inventory could no be decreased! Check Product ID or quantity!";
+		}
+		else {
+			return "Cancelled!";
+		}
+	}
+
 
 
 }

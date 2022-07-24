@@ -166,4 +166,15 @@ public class ProductRepository extends BaseEntityRepository {
 		return quantity;
 	}
 
+	public double decreaseInvetory(Product product, double quantity) {
+		if (product== null && quantity>0) {
+			return -1;
+		}
+		entityManager.getTransaction().begin();
+		product.setQuantity(product.getQuantity() - quantity);
+		entityManager.merge(product);
+		entityManager.getTransaction().commit();
+		return quantity;
+	}
+
 }

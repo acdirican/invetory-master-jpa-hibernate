@@ -14,8 +14,8 @@ public class Command {
 		static final String PRODUCT = "product";
 		static final String SUPPLIER = "supplier";
 	
-	static final String INCREASE = "incr";
-	static final String DECREASE = "decr";
+	static final String INCREASE_INV = "inc_inv";
+	static final String DECREASE_INV = "dec_inv";
 	static final String LOG = "log";
 	
 	static final String FIND = "find";

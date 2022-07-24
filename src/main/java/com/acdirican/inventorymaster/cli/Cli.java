@@ -73,12 +73,12 @@ public class Cli {
 			return find(parameters);
 		}
 		
-		case Command.INCREASE: {
-			return increase(parameters);
+		case Command.INCREASE_INV: {
+			return increaseInvetory(parameters);
 		}
 		
-		case Command.DECREASE: {
-			return increase(parameters);
+		case Command.DECREASE_INV: {
+			return deacreaseInvetory(parameters);
 		}
 
 		case Command.ADD: {
@@ -121,7 +121,7 @@ public class Cli {
 		}
 	}
 
-	private String increase(String[] parameters) {
+	private String increaseInvetory(String[] parameters) {
 		if (parameters.length < 3) {
 			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
@@ -137,15 +137,14 @@ public class Cli {
 		
 	}
 	
-	private String deacrease(String[] parameters) {
+	private String deacreaseInvetory(String[] parameters) {
 		if (parameters.length < 3) {
 			return Error.ERROR + Error.MISSING_ARGUMENT;
 		}
 		try {
-			
 			int ID = Integer.parseInt(parameters[1]);
 			double quantity =  Double.parseDouble(parameters[2]);
-			return productCli.increaseInvetory(ID, quantity);
+			return productCli.decreaseInvetory(ID, quantity);
 			
 		} catch (NumberFormatException e) {
 			return Error.ERROR + "ID and quantity must be umeric!";

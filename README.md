@@ -2,7 +2,7 @@
 
 This is a simple inventory managment software based on Hibernate (JPA), papared by Maven. Its uses MySQL. You look at my invetory-master-JDBC repository for its JDBC version.
 
-The project allows you to keep track of a product inventory with supplier information. Therefore, it includes two entities: Product and Supplier. There is an one-to-many relationship between them.  
+The project allows you to keep track of a product inventory with supplier information by loggin the invetory movements. Therefore, it includes three entities: Product, Supplier and Log. There is an one-to-many relationship between them.  
 
 In terms JPA features, the project runs queries using SQL, JPQL, NamedQueries, stored procedure, NamedStoredProcedure, as well ass Entity, Embeddable and SecondaryTable.
 

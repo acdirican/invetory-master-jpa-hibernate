@@ -29,6 +29,10 @@ List of Commands:
 <li>getindex [product/supplier] [INDEX]</li>
 <li>getid [product/supplier] [ID]</li>
 <br/>
+<li>inc_inv [ID] [QUANTITY]</li>
+<li>dec_inv [ID] [QUANTITY]</li>
+<li>log all/[ID]</li>
+<br/>
 <li>update [product/supplier] [ID]</li>
 <li>add [product/supplier]</li>
 <li>delete [product/supplier] [ID]</li></li>

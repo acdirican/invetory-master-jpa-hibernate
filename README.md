@@ -8,7 +8,7 @@ In terms JPA features, the project runs queries using SQL, JPQL, NamedQueries, s
 
 You can run the project using JPA (Persistence, EntityManagerFactory, EntityManager, persistance.xml) or native Hibernate (Configuration, SessionFactory,Session, hibernate.cfg.xml, hibernate.properties) using the factory BaseRepository
 
-The project has an MVC like architecture in which CLI, Repository and Model are seperated. It also applies Repository Pattern.
+The project has an MVC like architecture in which CLI (view), Service (Controller) and Repository (Model) are seperated. It also applies Repository Pattern.
 
 Before running the project, you first need to install MySQL (port: 3306) and then create the inventorymaster_jpa_db using the SQL import file given in the project folder.
 

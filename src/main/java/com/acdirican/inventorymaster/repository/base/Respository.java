@@ -4,10 +4,9 @@ import java.util.List;
 
 import com.acdirican.inventorymaster.model.BaseEntity;
 
-public abstract class BaseEntityRespository<T extends BaseEntity> extends BaseRepository<T> {
+public abstract class Respository<T extends BaseEntity> extends BaseRepository<T> {
 	
-	
-	public BaseEntityRespository(RepositoryManager repository) {
+	public Respository(RepositoryManager repository) {
 		super(repository);
 	}
 	

@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.base.Logger;
-import com.acdirican.inventorymaster.repository.base.ProductRepository;
-import com.acdirican.inventorymaster.repository.base.RepositoryManager;
-import com.acdirican.inventorymaster.repository.base.SupplierRepository;
+import com.acdirican.inventorymaster.service.base.LoggerService;
+import com.acdirican.inventorymaster.service.base.ProductService;
+import com.acdirican.inventorymaster.service.base.ServiceManager;
+import com.acdirican.inventorymaster.service.base.SupplierService;
 
 /**
  * Command line user interface of the software
@@ -20,32 +20,29 @@ public class Cli {
 
 	
 	private Scanner scanner = null;
-	private RepositoryManager repository;
-	private ProductRepository productRepository;
-	private SupplierRepository supplierRepository;
-	private Logger logger;
+	private ServiceManager serviceManager;
+	private ProductService productService;
+	private SupplierService supplierService;
+	private LoggerService loggerService;
 
 	private ProductCli productCli;
 	private SupplierCli supplierCli;
 	private LogCli logCli;
 
-	public Cli(RepositoryManager repository) {
+	public Cli(ServiceManager serviceManager) {
 		
-		if (!repository.connect()) {
-			System.err.println("Could not be connected to the mysql database!");
-			return;
-		}
+	
 		
 		System.out.println("DB conneciton is successfull!");			
 
-		this.repository = repository;
-		this.productRepository = repository.getProductRepository();
-		this.supplierRepository = repository.getSupplierRepository();
-		this.logger = repository.getLogger();
+		this.serviceManager = serviceManager;
+		this.productService = serviceManager.getProductService();
+		this.supplierService = serviceManager.getSupplierService();
+		this.loggerService = serviceManager.getLoggerService();
 		
-		this.productCli = new ProductCli(this, productRepository);
-		this.supplierCli = new SupplierCli(this, supplierRepository);
-		this.logCli = new LogCli(this, logger);
+		this.productCli = new ProductCli(this, productService);
+		this.supplierCli = new SupplierCli(this, supplierService);
+		this.logCli = new LogCli(this, loggerService);
 		this.scanner = Utils.scanner;
 		init();
 	}
@@ -62,7 +59,6 @@ public class Cli {
 			System.out.println(output);
 			System.out.println();
 		} while (!cmd.equals(Command.EXIT));
-		repository.close();
 	}
 
 	private String execute(String cmd) {
@@ -313,7 +309,7 @@ public class Cli {
 	}
 
 	private String metadata() {
-		return repository.metaData();
+		return serviceManager.metaData();
 	}
 
 	public ProductCli getProductCli() {
@@ -324,8 +320,8 @@ public class Cli {
 		return supplierCli;
 	}
 
-	public RepositoryManager getRepository() {
-		return repository;
+	public ServiceManager getServiceManager() {
+		return serviceManager;
 	}
 
 	Supplier selectSupplier() {
@@ -336,6 +332,6 @@ public class Cli {
 		String supplierIDStr = productCli.scanner.nextLine().trim();
 		return supplierIDStr.equals("") 
 				? null 
-				: getRepository().findSupplier(Integer.parseInt(supplierIDStr)).orElse(null);
+				: supplierService.getWidthID(Integer.parseInt(supplierIDStr)).orElse(null);
 	}
 }

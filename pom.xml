@@ -15,6 +15,7 @@
 
 		<!-- Variables -->
 		<java.version>1.8</java.version>
+		
 		<hibernate.version>5.6.0.Final</hibernate.version>
 		<validator.version>5.3.4.Final</validator.version>
 
@@ -47,13 +48,13 @@
 			<version>${hibernate.version}</version>
 			<type>pom</type>
 		</dependency>
-
+		<!--
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.2.Final</version>
 		</dependency>
-
+		-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>

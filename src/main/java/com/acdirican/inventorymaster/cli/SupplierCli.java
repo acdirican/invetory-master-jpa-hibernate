@@ -5,20 +5,20 @@ import java.util.List;
 import java.util.Optional;
 
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.base.SupplierRepository;
+import com.acdirican.inventorymaster.service.base.SupplierService;
 
 /**
- * Cli for Supplier entity
+ * Cli (Viewer) for Supplier entity
  * 
  * @author Ahmet Cengizhan Dirican
  *
  */
 public class SupplierCli extends AbstractCLi {
-	private SupplierRepository supplierRepository;
+	private SupplierService supplierService;
 
-	public SupplierCli(Cli cli, SupplierRepository supplierRepository) {
+	public SupplierCli(Cli cli, SupplierService supplierService) {
 		super(cli);
-		this.supplierRepository = supplierRepository;
+		this.supplierService = supplierService;
 		this.scanner = Utils.scanner;
 	}
 
@@ -31,7 +31,7 @@ public class SupplierCli extends AbstractCLi {
 			return "No supplier ID for deletion!";
 		}
 
-		int result = supplierRepository.deleteAll(id_list);
+		int result = supplierService.deleteAll(id_list);
 		if (result == id_list.size()) {
 			return "All suppliers deleted succesfull.";
 		} else if (result > 0) {
@@ -46,7 +46,7 @@ public class SupplierCli extends AbstractCLi {
 
 	String find(String name) {
 
-		List<Supplier> suppliers = supplierRepository.find(name);
+		List<Supplier> suppliers = supplierService.find(name);
 		if (suppliers == null) {
 			return Error.DBERROR;
 		}
@@ -56,7 +56,7 @@ public class SupplierCli extends AbstractCLi {
 	}
 
 	String update(int ID) {
-		Optional<Supplier> supplierOp = supplierRepository.getWidthID(ID);
+		Optional<Supplier> supplierOp = supplierService.getWidthID(ID);
 		if (supplierOp.isEmpty()) {
 			return Error.ERROR + "Supplier with the ID " + ID + " could not be found!";
 		}
@@ -101,7 +101,7 @@ public class SupplierCli extends AbstractCLi {
 			supplier.getContactPerson().setLastName(contactPersonLastName);;
 		}
 		
-		if (supplierRepository.update(supplier)) {
+		if (supplierService.update(supplier)) {
 			return "Supplier succesfully updated!";
 		} else {
 			return "Supplier could not be updated!";
@@ -114,7 +114,7 @@ public class SupplierCli extends AbstractCLi {
 			return "Delete cancelled";
 		}
 
-		boolean result = supplierRepository.delete(ID);
+		boolean result = supplierService.delete(ID);
 		if (result) {
 			return "Supplier delete is succesfull.";
 		}
@@ -123,7 +123,7 @@ public class SupplierCli extends AbstractCLi {
 	}
 
 	String getWithIndex(int index) {
-		Optional<Supplier> supplierOp = supplierRepository.getWidthIndex(index);
+		Optional<Supplier> supplierOp = supplierService.getWidthIndex(index);
 		if (supplierOp.isPresent()) {
 			Supplier supplier = supplierOp.get();
 			System.out.println(supplier);
@@ -136,7 +136,7 @@ public class SupplierCli extends AbstractCLi {
 	}
 
 	String getWidthID(int ID) {
-		Optional<Supplier> supplierOp = supplierRepository.getWidthID(ID);
+		Optional<Supplier> supplierOp = supplierService.getWidthID(ID);
 		if (supplierOp.isPresent()) {
 			Supplier supplier = supplierOp.get();
 			System.out.println(supplier);
@@ -167,7 +167,7 @@ public class SupplierCli extends AbstractCLi {
 		Utils.line();
 		Supplier supplier = new Supplier(name, phone, address, contactFirstName, contactPersonLastName);
 
-		if (supplierRepository.add(supplier).isPresent())
+		if (supplierService.add(supplier).isPresent())
 			return "A new supplier added.";
 		else
 			return "Data coul not be added.";
@@ -184,7 +184,7 @@ public class SupplierCli extends AbstractCLi {
 	}
 
 	String list() {
-		List<Supplier> suppliers = supplierRepository.list();
+		List<Supplier> suppliers = supplierService.list();
 		if (suppliers == null) {
 			return Error.DBERROR;
 		}

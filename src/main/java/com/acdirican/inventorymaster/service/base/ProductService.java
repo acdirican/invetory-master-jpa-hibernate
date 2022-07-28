@@ -1,19 +1,13 @@
-package com.acdirican.inventorymaster.repository.base;
+package com.acdirican.inventorymaster.service.base;
 
 import java.util.List;
 
 import com.acdirican.inventorymaster.model.Product;
 
-public abstract class ProductRepository extends Respository<Product> {
+public interface ProductService extends Service<Product> {
 
-	public ProductRepository(RepositoryManager repository) {
-		super(repository);
-	}
-
-	/* NamedQuery */
 	public abstract List<Product> listMoreThan(double quantity);
 
-	/* NamedQuery */
 	public abstract List<Product> listLessThan(double quantity);
 
 	/**
@@ -29,12 +23,9 @@ public abstract class ProductRepository extends Respository<Product> {
 	 */
 	public abstract List<Product> listDepleteds();
 
-	/* Using named query */
 	public abstract int increaseInvetory(int ID, double quantity);
 
-	/* Using the entity */
 	public abstract boolean increaseInvetory(Product product, double quantity);
 
 	public abstract boolean decreaseInvetory(Product product, double quantity);
-
 }

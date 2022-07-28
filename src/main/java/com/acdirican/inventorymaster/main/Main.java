@@ -4,6 +4,7 @@ package com.acdirican.inventorymaster.main;
 import com.acdirican.inventorymaster.cli.Cli;
 import com.acdirican.inventorymaster.repository.base.RepositoryManager;
 import com.acdirican.inventorymaster.repository.base.RepositoryManager.RepositoryType;
+import com.acdirican.inventorymaster.service.ServiceManagerImpl;
 
 
 /**
@@ -14,8 +15,15 @@ import com.acdirican.inventorymaster.repository.base.RepositoryManager.Repositor
  */
 public class Main {
 	public static void main(String[] args) {
-		RepositoryManager respository =  RepositoryManager.getRepository(RepositoryType.JPA);
-		Cli cli =  new Cli(respository);		
+		RepositoryManager repository =  RepositoryManager.getRepository(RepositoryType.JPA);
+		
+		if (!repository.connect()) {
+			System.err.println("Could not be connected to the mysql database!");
+			return;
+		}
+		
+		Cli cli =  new Cli(new ServiceManagerImpl(repository));	
+		repository.close();
 	}
 }
 

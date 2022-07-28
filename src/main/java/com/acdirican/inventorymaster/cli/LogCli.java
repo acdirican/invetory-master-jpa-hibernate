@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.acdirican.inventorymaster.model.Log;
-import com.acdirican.inventorymaster.repository.base.Logger;
+import com.acdirican.inventorymaster.service.base.LoggerService;
 
 /**
  * Cli for Log entity
@@ -14,16 +14,16 @@ import com.acdirican.inventorymaster.repository.base.Logger;
  *
  */
 public class LogCli extends AbstractCLi {
-	private Logger logger;
+	private LoggerService loggerService;
 
-	public LogCli(Cli cli, Logger logger) {
+	public LogCli(Cli cli, LoggerService loggerService) {
 		super(cli);
-		this.logger = logger;
+		this.loggerService = loggerService;
 		this.scanner = Utils.scanner;
 	}
 
 	String getWithIndex(int index) {
-		Optional<Log> logOp = logger.getWidthIndex(index);
+		Optional<Log> logOp = loggerService.getWidthIndex(index);
 		if (logOp.isPresent()) {
 			Log log = logOp.get();
 			System.out.println(log);
@@ -34,7 +34,7 @@ public class LogCli extends AbstractCLi {
 	}
 
 	String getWidthID(int ID) {
-		Optional<Log> logOp = logger.getWidthID(ID);
+		Optional<Log> logOp = loggerService.getWidthID(ID);
 		if (logOp.isPresent()) {
 			Log log = logOp.get();
 			System.out.println(log);
@@ -56,7 +56,7 @@ public class LogCli extends AbstractCLi {
 	}
 
 	String list() {
-		List<Log> logs = logger.list();
+		List<Log> logs = loggerService.list();
 		if (logs == null) {
 			return Error.DBERROR;
 		}
@@ -66,7 +66,7 @@ public class LogCli extends AbstractCLi {
 	}
 	
 	public String list(int ID) {
-		List<Log> logs = logger.listByProduct(ID);
+		List<Log> logs = loggerService.listByProduct(ID);
 		if (logs == null) {
 			return Error.DBERROR;
 		}

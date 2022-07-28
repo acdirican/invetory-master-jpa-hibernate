@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.base.ProductRepository;
+import com.acdirican.inventorymaster.service.base.ProductService;
 
 /**
  * Cli for Product entity
@@ -17,12 +17,12 @@ import com.acdirican.inventorymaster.repository.base.ProductRepository;
 public class ProductCli extends AbstractCLi {
 	
 
-	private ProductRepository productRepository;
+	private ProductService productService;
 	
 
-	public ProductCli(Cli cli, ProductRepository productRepository) {
+	public ProductCli(Cli cli, ProductService productRepository) {
 		super(cli);
-		this.productRepository = productRepository;
+		this.productService = productRepository;
 	}
 
 	String delete_all(List<Integer> id_list) {
@@ -34,7 +34,7 @@ public class ProductCli extends AbstractCLi {
 			return "No product ID for deletion!";
 		}
 
-		int result = productRepository.deleteAll(id_list);
+		int result = productService.deleteAll(id_list);
 		if (result == id_list.size()) {
 			return "All products deleted succesfull.";
 		} else if (result > 0) {
@@ -49,7 +49,7 @@ public class ProductCli extends AbstractCLi {
 
 	String list_depleteds() {
 
-		List<Product> products = productRepository.listDepleteds();
+		List<Product> products = productService.listDepleteds();
 
 		if (products == null) {
 			return Error.DBERROR;
@@ -61,7 +61,7 @@ public class ProductCli extends AbstractCLi {
 
 	String list_equals(double quantity) {
 
-		List<Product> products = productRepository.listEquals(quantity);
+		List<Product> products = productService.listEquals(quantity);
 		if (products == null) {
 			return Error.DBERROR;
 		}
@@ -72,7 +72,7 @@ public class ProductCli extends AbstractCLi {
 
 	String find(String name) {
 
-		List<Product> products = productRepository.find(name);
+		List<Product> products = productService.find(name);
 		if (products == null) {
 			return Error.DBERROR;
 		}
@@ -83,7 +83,7 @@ public class ProductCli extends AbstractCLi {
 
 	String list_morethan(double quantity) {
 
-		List<Product> products = productRepository.listMoreThan(quantity);
+		List<Product> products = productService.listMoreThan(quantity);
 		if (products == null) {
 			return Error.DBERROR;
 		}
@@ -94,7 +94,7 @@ public class ProductCli extends AbstractCLi {
 
 	String list_lessthan(double quantity) {
 
-		List<Product> products = productRepository.listLessThan(quantity);
+		List<Product> products = productService.listLessThan(quantity);
 		if (products == null) {
 			return Error.DBERROR;
 		}
@@ -104,7 +104,7 @@ public class ProductCli extends AbstractCLi {
 	}
 
 	String update(int ID) {
-		Optional<Product> productOp = productRepository.getWidthID(ID);
+		Optional<Product> productOp = productService.getWidthID(ID);
 		if (productOp.isEmpty()) {
 			return Error.ERROR + "Product with the ID " + ID + " could not be found!";
 		}
@@ -135,7 +135,7 @@ public class ProductCli extends AbstractCLi {
 			product.setSupplier(supplier);
 		}
 
-		if (productRepository.update(product)) {
+		if (productService.update(product)) {
 			return "Product succesfully updated!";
 		}
 		return Error.ERROR + "Product could not be updated!";
@@ -147,7 +147,7 @@ public class ProductCli extends AbstractCLi {
 			return "Delete cancelled";
 		}
 
-		boolean result = productRepository.delete(ID);
+		boolean result = productService.delete(ID);
 		if (result) {
 			return "Product delete is succesfull.";
 		}
@@ -157,7 +157,7 @@ public class ProductCli extends AbstractCLi {
 
 	String getWidthIndex(int index) {
 		
-		Optional<Product> productOp = productRepository.getWidthIndex(index);
+		Optional<Product> productOp = productService.getWidthIndex(index);
 		if (productOp.isEmpty()) {
 			return Error.ERROR + "Product with the index " + index + " could not be found!";
 		}
@@ -168,7 +168,7 @@ public class ProductCli extends AbstractCLi {
 	}
 
 	public String getWidthID(int ID) {
-		Optional<Product> productOp = productRepository.getWidthID(ID);
+		Optional<Product> productOp = productService.getWidthID(ID);
 		if (productOp.isEmpty()) {
 			return Error.ERROR + "Product with the ID " + ID + " could not be found!";
 		}
@@ -190,7 +190,7 @@ public class ProductCli extends AbstractCLi {
 		
 		Product product = new Product(name, quantity, supplier);
 
-		if (productRepository.add(product).isPresent())
+		if (productService.add(product).isPresent())
 			return "A new product added.";
 		else
 			return "Data coul not be added.";
@@ -208,7 +208,7 @@ public class ProductCli extends AbstractCLi {
 	}
 
 	String list() {
-		List<Product> products = productRepository.list();
+		List<Product> products = productService.list();
 		if (products == null) {
 			return Error.DBERROR;
 		}
@@ -218,13 +218,13 @@ public class ProductCli extends AbstractCLi {
 	}
 
 	public String increaseInvetory(int ID, double quantity) {
-		Optional<Product> productOp = productRepository.getWidthID(ID);
+		Optional<Product> productOp = productService.getWidthID(ID);
 		if (productOp.isEmpty()) {
 			return Error.ERROR + "Product with the ID " + ID + " could not be found!";
 		}
 		System.out.println(productOp.get());
 		if (Utils.confirm("Are you sure to increase the product's inventory?")) {
-			return productRepository.increaseInvetory(productOp.get(), quantity)  
+			return productService.increaseInvetory(productOp.get(), quantity)  
 					? "Inventory increased succesfully"
 					: "Inventory could no be increased! Check Product ID or quantity!";
 		}
@@ -235,13 +235,13 @@ public class ProductCli extends AbstractCLi {
 	}
 
 	public String decreaseInvetory(int ID, double quantity) {
-		Optional<Product> productOp = productRepository.getWidthID(ID);
+		Optional<Product> productOp = productService.getWidthID(ID);
 		if (productOp.isEmpty()) {
 			return Error.ERROR + "Product with the ID " + ID + " could not be found!";
 		}
 		System.out.println(productOp.get());
 		if (Utils.confirm("Are you sure to decrease the product's inventory?")) {
-			return productRepository.decreaseInvetory(productOp.get(), quantity)  
+			return productService.decreaseInvetory(productOp.get(), quantity)  
 					? "Inventory decreased succesfully"
 					: "Inventory could no be decreased! Check Product ID or quantity!";
 		}

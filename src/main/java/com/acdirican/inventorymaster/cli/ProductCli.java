@@ -4,10 +4,9 @@ package com.acdirican.inventorymaster.cli;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.ProductRepository;
+import com.acdirican.inventorymaster.repository.base.ProductRepository;
 
 /**
  * Cli for Product entity
@@ -158,7 +157,7 @@ public class ProductCli extends AbstractCLi {
 
 	String getWidthIndex(int index) {
 		
-		Optional<Product> productOp = productRepository.getWithIndex(index);
+		Optional<Product> productOp = productRepository.getWidthIndex(index);
 		if (productOp.isEmpty()) {
 			return Error.ERROR + "Product with the index " + index + " could not be found!";
 		}

@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
-
-
 import com.acdirican.inventorymaster.model.Product;
 import com.acdirican.inventorymaster.model.Supplier;
+import com.acdirican.inventorymaster.repository.base.RepositoryManager;
+import com.acdirican.inventorymaster.repository.base.SupplierRepository;
 
 
 /**
@@ -17,9 +17,9 @@ import com.acdirican.inventorymaster.model.Supplier;
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class SupplierRepository extends BaseEntityRepository {
+public class SupplierRepositoryImpl extends SupplierRepository {
 
-	public SupplierRepository(BaseRepository repository) {
+	public SupplierRepositoryImpl(RepositoryManager repository) {
 		super(repository);
 	}
 

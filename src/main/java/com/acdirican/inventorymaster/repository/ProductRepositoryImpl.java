@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
-
-
 import com.acdirican.inventorymaster.model.InventoryMovement;
 import com.acdirican.inventorymaster.model.Log;
 import com.acdirican.inventorymaster.model.Product;
+import com.acdirican.inventorymaster.repository.base.ProductRepository;
+import com.acdirican.inventorymaster.repository.base.RepositoryManager;
 
 
 /**
@@ -17,11 +17,11 @@ import com.acdirican.inventorymaster.model.Product;
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class ProductRepository extends BaseEntityRepository {
-	private Logger logger;
-	public ProductRepository(BaseRepository repository) {
+public class ProductRepositoryImpl extends ProductRepository {
+	private LoggerImpl logger;
+	public ProductRepositoryImpl(RepositoryManager repository) {
 		super(repository);
-		this.logger =  new Logger(repository);
+		this.logger =  new LoggerImpl(repository);
 	}
 
 	public List<Product> list() {
@@ -81,11 +81,11 @@ public class ProductRepository extends BaseEntityRepository {
 	}
 
 	/* ? Do using JPA */
-	public Optional<Product> getWithIndex(int i) {
+	public Optional<Product> getWidthIndex(int i) {
 		//? error prone
 		return Optional.of(list().get(i));
 	}
-
+	
 	public boolean delete(int ID) {
 		Optional<Product> product = getWidthID(ID);
 		if (product.isPresent()) {
@@ -183,5 +183,7 @@ public class ProductRepository extends BaseEntityRepository {
 		}
 		return true;
 	}
+
+
 
 }

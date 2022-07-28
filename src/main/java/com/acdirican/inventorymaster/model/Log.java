@@ -2,14 +2,10 @@ package com.acdirican.inventorymaster.model;
 
 import java.time.LocalDateTime;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -22,11 +18,7 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="Log.filterByProductID",query= "select l from Log l where l.product.id = :id")	
 })
-public class Log {
-	
-	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	private Integer ID;
+public class Log extends BaseEntity{
 	
 	@Column(name="quantity", nullable = false)
 	private Double quantity;
@@ -67,13 +59,7 @@ public class Log {
 		this.type = InventoryMovement.UPDATE;
 	}
 
-	public Integer getID() {
-		return ID;
-	}
-
-	public void setID(Integer iD) {
-		ID = iD;
-	}
+	
 
 	public Double getQuantity() {
 		return quantity;

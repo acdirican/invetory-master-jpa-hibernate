@@ -4,10 +4,8 @@ package com.acdirican.inventorymaster.cli;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.acdirican.inventorymaster.model.Log;
-
-import com.acdirican.inventorymaster.repository.Logger;
+import com.acdirican.inventorymaster.repository.base.Logger;
 
 /**
  * Cli for Log entity

@@ -6,9 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -57,14 +54,7 @@ import javax.persistence.Table;
 				@StoredProcedureParameter(name="quantity", mode = ParameterMode.IN ,type=Double.class)
 		}) 
 })
-
-
-public class Product {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer ID;
-	
+public class Product extends BaseEntity{
 	@Column(nullable = false)
 	private String name;
 	

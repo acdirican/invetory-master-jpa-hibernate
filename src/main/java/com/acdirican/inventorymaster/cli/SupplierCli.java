@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.SupplierRepository;
+import com.acdirican.inventorymaster.repository.base.SupplierRepository;
 
 /**
  * Cli for Supplier entity

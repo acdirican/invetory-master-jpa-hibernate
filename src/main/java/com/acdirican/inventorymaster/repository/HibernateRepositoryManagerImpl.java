@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.acdirican.inventorymaster.model.Supplier;
+import com.acdirican.inventorymaster.repository.base.ProductRepository;
+import com.acdirican.inventorymaster.repository.base.RepositoryManager;
+import com.acdirican.inventorymaster.repository.base.SupplierRepository;
 
 /**
  * Fundamental repository class responsible for DB connection and entity repository initialization
@@ -17,7 +20,7 @@ import com.acdirican.inventorymaster.model.Supplier;
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class RepositoryHibernate extends BaseRepository{
+public class HibernateRepositoryManagerImpl extends RepositoryManager{
 
 	private static Session session;
 	private static SessionFactory sessionFactory;
@@ -29,8 +32,8 @@ public class RepositoryHibernate extends BaseRepository{
 		sessionFactory = cfg.buildSessionFactory();
 		session = sessionFactory.openSession();
 		
-		productRepository = new ProductRepository(this);
-		supplierRepository =  new SupplierRepository(this);
+		productRepository = new ProductRepositoryImpl(this);
+		supplierRepository =  new SupplierRepositoryImpl(this);
 		
 		return true;
 	}

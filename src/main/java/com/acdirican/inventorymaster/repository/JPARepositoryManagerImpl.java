@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.acdirican.inventorymaster.repository.base.RepositoryManager;
+
 /**
  * Fundamental repository class responsible for DB connection and entity repository initialization
  * 
@@ -16,7 +18,7 @@ import javax.persistence.Persistence;
  * 
  *https://stackoverflow.com/questions/10607196/how-to-get-database-metadata-from-entity-manager
  */
-public class RepositoryJPA extends BaseRepository {
+public class JPARepositoryManagerImpl extends RepositoryManager {
 
 	static final String ERROR = "Database error!";
 	
@@ -30,9 +32,9 @@ public class RepositoryJPA extends BaseRepository {
 		entityManagerFactory = Persistence.createEntityManagerFactory(myPersistenceUnit); 
 		entitiyManager = entityManagerFactory.createEntityManager();
 		
-		productRepository = new ProductRepository(this);
-		supplierRepository =  new SupplierRepository(this);
-		logger =  new Logger(this);
+		productRepository = new ProductRepositoryImpl(this);
+		supplierRepository =  new SupplierRepositoryImpl(this);
+		logger =  new LoggerImpl(this);
 		return true;
 	}
 

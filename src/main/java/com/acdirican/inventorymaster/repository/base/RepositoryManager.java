@@ -1,20 +1,23 @@
-package com.acdirican.inventorymaster.repository;
+package com.acdirican.inventorymaster.repository.base;
 
 
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
-
 import com.acdirican.inventorymaster.model.Supplier;
+import com.acdirican.inventorymaster.repository.HibernateRepositoryManagerImpl;
+import com.acdirican.inventorymaster.repository.JPARepositoryManagerImpl;
+import com.acdirican.inventorymaster.repository.ProductRepositoryImpl;
+import com.acdirican.inventorymaster.repository.SupplierRepositoryImpl;
 
 /**
- * Factory to create entity repositories {@link ProductRepository} and {@link SupplierRepository}, and to connect to the database;
+ * Factory to create entity repositories {@link ProductRepositoryImpl} and {@link SupplierRepositoryImpl}, and to connect to the database;
  * 
  * @author Ahmet Cengizhan Dirican
  *
  */
-public abstract  class BaseRepository {
+public abstract  class RepositoryManager {
 	public enum RepositoryType {JPA, HIBERNATE};
 	
 	protected static final String ERROR = "Database error!";
@@ -28,12 +31,12 @@ public abstract  class BaseRepository {
 	public abstract String metaData(String tableName);
 	public abstract String metaData();
 	
-	public static BaseRepository getRepository(RepositoryType type) {
+	public static RepositoryManager getRepository(RepositoryType type) {
 		if (type.equals(RepositoryType.JPA)) {
-			return new RepositoryJPA();
+			return new JPARepositoryManagerImpl();
 		}
 		else {
-			return new RepositoryHibernate();
+			return new HibernateRepositoryManagerImpl();
 		}
 	}
 	

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.acdirican.inventorymaster.model.Log;
+import com.acdirican.inventorymaster.repository.base.Logger;
+import com.acdirican.inventorymaster.repository.base.RepositoryManager;
 
 /**
  * Looger class to keep track inventory updates using Log entity.
@@ -12,9 +14,9 @@ import com.acdirican.inventorymaster.model.Log;
  * @author Ahmet Cengizhan Dirican
  *
  */
-public class Logger extends BaseEntityRepository {
+public class LoggerImpl extends Logger {
 
-	public Logger(BaseRepository repository) {
+	public LoggerImpl(RepositoryManager repository) {
 		super(repository);
 	}
 

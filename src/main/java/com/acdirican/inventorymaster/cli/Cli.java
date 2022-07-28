@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.acdirican.inventorymaster.model.Supplier;
-import com.acdirican.inventorymaster.repository.ProductRepository;
-import com.acdirican.inventorymaster.repository.BaseRepository;
-import com.acdirican.inventorymaster.repository.Logger;
-import com.acdirican.inventorymaster.repository.SupplierRepository;
+import com.acdirican.inventorymaster.repository.base.Logger;
+import com.acdirican.inventorymaster.repository.base.ProductRepository;
+import com.acdirican.inventorymaster.repository.base.RepositoryManager;
+import com.acdirican.inventorymaster.repository.base.SupplierRepository;
 
 /**
  * Command line user interface of the software
@@ -20,7 +20,7 @@ public class Cli {
 
 	
 	private Scanner scanner = null;
-	private BaseRepository repository;
+	private RepositoryManager repository;
 	private ProductRepository productRepository;
 	private SupplierRepository supplierRepository;
 	private Logger logger;
@@ -29,7 +29,7 @@ public class Cli {
 	private SupplierCli supplierCli;
 	private LogCli logCli;
 
-	public Cli(BaseRepository repository) {
+	public Cli(RepositoryManager repository) {
 		
 		if (!repository.connect()) {
 			System.err.println("Could not be connected to the mysql database!");
@@ -324,7 +324,7 @@ public class Cli {
 		return supplierCli;
 	}
 
-	public BaseRepository getRepository() {
+	public RepositoryManager getRepository() {
 		return repository;
 	}
 
